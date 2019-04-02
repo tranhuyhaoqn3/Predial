@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Predial"
+             xmlns:views="clr-namespace:SuaveControls.Views;assembly=SuaveControls.FloatingActionButton"
+             x:Class="Predial.MainPage"
+             BackgroundColor="#FAF9FA"
+             NavigationPage.HasNavigationBar="True" >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="RegisterItem" Order="Secondary" Text="Register" Priority="1" />
+        <ToolbarItem Name="PrivacyItem" Order="Secondary" Text="Privacy" Priority="2" />
+        <ToolbarItem Name="AboutItem" Order="Secondary" Text="About" Priority="3" />
+        <ToolbarItem Name="PhonenumberItem" Order="Secondary" Text="Phone number" Priority="0" Clicked="MenuItem1_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout >
+        <Frame HasShadow="true" OutlineColor="Gray" Margin="10,10,10,0" Padding="3" >
+            <ListView x:Name="myDemoListView" ItemSelected="MyDemoListView_ItemSelected" SeparatorColor="Black">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{x:Binding}" VerticalOptions="Center" Margin="20,0,0,0" HorizontalOptions="Start"  TextColor="Black"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+        </Frame>
+        <StackLayout Margin="10,5,10,30" Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand">
+            <views:FloatingActionButton
+                 Image="plus"
+                ButtonColor="#4CB050"
+                WidthRequest="80"
+                HeightRequest="90">
+            </views:FloatingActionButton>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

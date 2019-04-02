@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Predial.AddMorePlan">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="White">
+            <StackLayout Orientation="Horizontal" BackgroundColor="White">
+                
+                <Button Text="Cancel" TextColor="Black" VerticalOptions="Start"
+                        HorizontalOptions="FillAndExpand" BackgroundColor="White"></Button>
+                <Button Text="Save" TextColor="Black" VerticalOptions="End"
+                        HorizontalOptions="FillAndExpand" BackgroundColor="White"></Button>
+            </StackLayout>
+            <StackLayout>
+                <Entry Placeholder="Plan Title"  BackgroundColor="White"
+                       TextColor="Black" PlaceholderColor="Black"></Entry>
+
+                <Entry Placeholder="Calling to number" BackgroundColor="White"
+                       TextColor="Black" PlaceholderColor="Black"
+                       Keyboard="Telephone"></Entry>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

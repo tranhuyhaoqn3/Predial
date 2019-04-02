@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             x:Class="Predial.AddUserPhoneNumber"
+             Title="Phone Number">
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="200"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True" />
+    </pages:PopupPage.Animation>
+    <ContentPage.Content>
+        <Frame BackgroundColor="White" HasShadow="True" CornerRadius="10" Margin="10" VerticalOptions="Center">
+            <StackLayout Padding="5">
+                <Label Text="Phone Number" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black" FontSize="Medium"/>
+                <Entry x:Name="PhoneEntry" TextColor="Black"
+                       BackgroundColor="White"
+                       Keyboard="Telephone"
+                       FontSize="Small"
+                       Placeholder="Insert your phone number" />
+                <Button Text="Save" VerticalOptions="Center"
+                        TextColor="white"
+                        BorderColor="Black"
+                        CornerRadius="10"
+                        BackgroundColor="#4CB050"
+                        Clicked="ButtonSave_Clicked"
+                        />
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</pages:PopupPage>

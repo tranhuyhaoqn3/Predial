@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:SuaveControls.Views;assembly=SuaveControls.FloatingActionButton"
+             x:Class="Predial.DetailPlan"
+             Title="Predial Plans"
+             NavigationPage.HasBackButton="True">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuItem1" Order="Secondary" Icon="" Text="Register" Priority="0" />
+        <ToolbarItem Name="MenuItem2" Order="Secondary" Icon="" Text="Privacy" Priority="1" />
+        <ToolbarItem Name="MenuItem2" Order="Secondary" Icon="" Text="About" Priority="2" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid  BackgroundColor="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Predial Plans" FontSize="Large"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="5"
+                   VerticalOptions="Center"
+                   />
+            <ImageButton Source="edit" 
+                         VerticalOptions="End"
+                         HorizontalOptions="End"
+                         BackgroundColor="White"
+                         Grid.Row="1"
+                         Grid.Column="9"
+                         Clicked="ImageButtonEdit_Clicked"
+                         />
+            <Label Text="Number:"
+                   FontSize="Small"
+                   Grid.Row="2"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"
+                   HorizontalOptions="End"
+                   VerticalOptions="Start"
+                   />
+            
+            <Label Text="1800575775" 
+                   x:Name="setNumber" 
+                   FontSize="Small"
+                   Grid.Row="2"
+                   Grid.Column="3"
+                   Grid.ColumnSpan="2"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"/>
+            <Label Text="EWT:" 
+                   FontSize="Small"
+                   Grid.Row="2"
+                   Grid.Column="5"
+                   HorizontalOptions="End"
+                   VerticalOptions="Start"
+                   />
+            <Label Text="~15 minutes" 
+                   FontSize="Small"
+                   Grid.Row="2"
+                   Grid.Column="6"
+                   Grid.ColumnSpan="3"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                   />
+
+            <Button Text="Edit"  BackgroundColor="#4682B4"
+                    TextColor="White" 
+                    Grid.Row="3"
+                    Grid.Column="6"
+                    Grid.ColumnSpan="2"
+                    VerticalOptions="Start"
+                    />
+            <Button Text="Call"  BackgroundColor="#83E34C"
+                    TextColor="White"
+                    Grid.Row="3"
+                    Grid.Column="8"
+                    Grid.ColumnSpan="2"
+                    VerticalOptions="Start"
+                    />
+            <Label Text="Plan Detail:"
+                   FontSize="Small"
+                   Grid.Row="4"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"
+                   />
+            <Frame HasShadow="true" 
+                   OutlineColor="Gray"   
+                   Grid.Row="5" 
+                   Grid.Column="1"
+                   Grid.ColumnSpan="9"
+                   Padding="0">
+                <ListView x:Name="listDetail" BackgroundColor="White" SeparatorColor="Black">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout BackgroundColor="white" Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <ImageButton Source="edit" 
+                                                     VerticalOptions="Start"
+                                                     HorizontalOptions="EndAndExpand"
+                                                     Margin="5"
+                                                     BackgroundColor="white"/>
+                                        <ImageButton Source="delete" 
+                                                     VerticalOptions="End"
+                                                     HorizontalOptions="End"
+                                                     Margin="5"
+                                                     BackgroundColor="white"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+            <views:FloatingActionButton
+                Image="plus"
+                ButtonColor="#4CB050"
+                WidthRequest="80"
+                HeightRequest="90"  
+                Grid.Row="6"
+                Grid.Column="7"
+                Grid.ColumnSpan="3"
+                HorizontalOptions="End">
+            </views:FloatingActionButton>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
