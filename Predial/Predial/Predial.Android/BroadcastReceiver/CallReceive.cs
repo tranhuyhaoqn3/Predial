@@ -31,7 +31,7 @@ namespace Predial.Droid
 {
 
     [BroadcastReceiver]
-    [IntentFilter(new[] { TelephonyManager.ActionPhoneStateChanged })]
+    [IntentFilter(new[] { TelephonyManager.ActionPhoneStateChanged})]
     public class CallReceive : BroadcastReceiver
     {
         private string incomingNumber;
@@ -43,7 +43,6 @@ namespace Predial.Droid
             // End Call
             if (state == TelephonyManager.ExtraStateIdle)
             {
-                Toast.MakeText(context, "ended", ToastLength.Long).Show();
             }
 
             // When outgoing call
@@ -51,23 +50,27 @@ namespace Predial.Droid
             {
                 var incomingPhoneNumber = intent.GetStringExtra(TelephonyManager.ExtraIncomingNumber);
                 Toast.MakeText(context, $"Incoming Number: {incomingPhoneNumber}", ToastLength.Long).Show();
+
                 CreateNotificationChannel(incomingNumber, context);
             }
 
             // When phone ring 
             if (state == TelephonyManager.ExtraStateRinging)
-                Toast.MakeText(context, "Phone Ringing", ToastLength.Long).Show();
+            {
+
+            }
             if (state == TelephonyManager.ExtraIncomingNumber)
             {
-               
             }
         }
         static int p = 0;
         private void CreateNotificationChannel(String incommingNumber, Context context)
         {
+            context.GetSystemService(Context.InputMethodService);
+
             NotificationManager notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
             String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
-            Intent notificationIntent = new Intent(context, typeof(DetailPlan));
+            Intent notificationIntent = new Intent(context, typeof(MainActivity));
             notificationIntent.SetFlags(ActivityFlags.ClearTop);
             PendingIntent penintent = PendingIntent.GetActivities(context, 0, new Intent[] { notificationIntent }, 0);
             if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
@@ -88,17 +91,13 @@ namespace Predial.Droid
 
             notificationBuilder.SetAutoCancel(true)
                     .SetDefaults(Notification.ColorDefault)
-
                     .SetSmallIcon(Resource.Drawable.plus)
-
                     .SetPriority((int)NotificationPriority.High)
                     .SetContentTitle("Notification")
                     .SetVibrate(new long[0])
                     .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification))
                     .SetContentText("End call with Call center")
                    .SetContentIntent(penintent);
-
-
             notificationManager.Notify(p, notificationBuilder.Build());
             p++;
         }

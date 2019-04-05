@@ -3,22 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Predial.AddMorePlan">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="White">
-            <StackLayout Orientation="Horizontal" BackgroundColor="White">
-                
-                <Button Text="Cancel" TextColor="Black" VerticalOptions="Start"
-                        HorizontalOptions="FillAndExpand" BackgroundColor="White"></Button>
-                <Button Text="Save" TextColor="Black" VerticalOptions="End"
-                        HorizontalOptions="FillAndExpand" BackgroundColor="White"></Button>
-            </StackLayout>
-            <StackLayout>
-                <Entry Placeholder="Plan Title"  BackgroundColor="White"
-                       TextColor="Black" PlaceholderColor="Black"></Entry>
+        <Grid BackgroundColor="white">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="65*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="90*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+            <Entry Placeholder="Plan Title"  BackgroundColor="White" x:Name="entTitle"
+                       TextColor="Black" PlaceholderColor="LightGray" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"></Entry>
+            <Entry Placeholder="Calling to number" BackgroundColor="White"
+                       TextColor="Black" PlaceholderColor="LightGray"  x:Name="entNumber"
+                       Keyboard="Telephone" Grid.Row="1"  Grid.Column="0"  Grid.ColumnSpan="3"></Entry>
+            <Button Text="Save" TextColor="white"  CornerRadius="10"
+                        BackgroundColor="#4CB050" VerticalOptions="Center" Grid.Row="2"  Grid.Column="1"
+                    Clicked="btnSave_Clicked"></Button>
 
-                <Entry Placeholder="Calling to number" BackgroundColor="White"
-                       TextColor="Black" PlaceholderColor="Black"
-                       Keyboard="Telephone"></Entry>
-            </StackLayout>
-        </StackLayout>
+        </Grid>
+       
     </ContentPage.Content>
 </ContentPage>

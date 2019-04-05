@@ -14,6 +14,8 @@ namespace Predial.DatabaseHelper
         {
             sqliteConnection = DependencyService.Get<IDatabaseConnection>().DbConnection();
             sqliteConnection.CreateTable<UserModel>();
+            sqliteConnection.DropTable<PredialPlanModel>();
+            sqliteConnection.DropTable<PredialPlanDetailModel>();
             sqliteConnection.CreateTable<PredialPlanModel>();
             sqliteConnection.CreateTable<PredialPlanDetailModel>();
 

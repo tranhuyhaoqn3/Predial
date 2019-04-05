@@ -7,9 +7,40 @@ namespace Predial.DatabaseHelper
 {
    public class PredialPlanDetailDataAccess:DataAccessBase
     {
-        public List<PredialPlanDetailModel> GetAllPredialPlansDetail()
+
+        public PredialPlanDetailDataAccess()
         {
-            return sqliteConnection.Table<PredialPlanDetailModel>().ToList();
+            if (sqliteConnection.Table<PredialPlanDetailModel>().Count() == 0)
+            {
+                var predialPlanDefault = new PredialPlanDetailModel
+                {
+                    PredialPlanID = 1,
+                    Key = 5.ToString(),
+                    Step = 1,
+                    WaitingSeconds = 2
+                };
+                sqliteConnection.Insert(predialPlanDefault);
+                predialPlanDefault = new PredialPlanDetailModel
+                {
+                    PredialPlanID = 1,
+                    Key = 2.ToString(),
+                    Step = 2,
+                    WaitingSeconds = 3
+                };
+                sqliteConnection.Insert(predialPlanDefault);
+                predialPlanDefault = new PredialPlanDetailModel
+                {
+                    PredialPlanID = 1,
+                    Key = 6.ToString(),
+                    Step = 3,
+                    WaitingSeconds = 2
+                };
+                sqliteConnection.Insert(predialPlanDefault);
+            }
+        }
+        public List<PredialPlanDetailModel> GetPredialPlansDetail(PredialPlanModel predialPlan)
+        {
+            return sqliteConnection.Table<PredialPlanDetailModel>().Where(item=> item.PredialPlanID == predialPlan.PredialPlanID).ToList();
         }
 
         public bool InsertPredialPlanDetail(PredialPlanDetailModel predialPlanDetail)

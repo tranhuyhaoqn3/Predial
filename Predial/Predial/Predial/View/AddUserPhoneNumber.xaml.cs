@@ -26,9 +26,13 @@ namespace Predial
 
         private void ButtonSave_Clicked(object sender, EventArgs e)
         {
+            if (String.IsNullOrWhiteSpace(PhoneEntry.Text) || !PhoneEntry.Text.All(char.IsDigit))
+            {
+                DisplayAlert("Alert", "Please fill correct phone number", "OK");
+                PhoneEntry.Focus();
+                return;
+            }
             userDataAccess = new UserDataAccess();
-
-
             UserModel user = new UserModel
             {
                 PhoneNumber = PhoneEntry.Text

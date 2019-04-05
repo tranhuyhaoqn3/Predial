@@ -23,11 +23,8 @@ namespace Predial.Droid
             Android.Manifest.Permission.ReadPhoneState,
             Android.Manifest.Permission.ReadPhoneNumbers,
             Android.Manifest.Permission.AccessNotificationPolicy,
-
-
         };
         const int RequestPhoneID = 0;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -42,9 +39,8 @@ namespace Predial.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
-
-            
         }
+        
         public override void OnBackPressed()
         {
            if(Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed))

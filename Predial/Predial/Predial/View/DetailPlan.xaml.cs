@@ -8,6 +8,9 @@ using Newtonsoft.Json.Linq;
 using Predial;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Rg.Plugins.Popup.Extensions;
+using Predial.Model;
+using Predial.DatabaseHelper;
 
 namespace Predial
 {
@@ -15,23 +18,31 @@ namespace Predial
 	public partial class DetailPlan : ContentPage
 	{
         UserDataAccess userDataAccess;
-
-        public DetailPlan ()
+        PredialPlanDetailDataAccess predialPlanDetailDataAccess;
+        public DetailPlan (PredialPlanModel predialPlan)
 		{
-
 			InitializeComponent ();
-            List<String> mylistDetail = new List<String>();
-            mylistDetail.Add("Name");
-            mylistDetail.Add("Size");
-            mylistDetail.Add("Age");
-            mylistDetail.Add("PPP");
-            listDetail.ItemsSource = mylistDetail;
 
-     
+            LoadPredialPlanModel(predialPlan);
+
+            setName.Text= predialPlan.PredialPlanName;
+            setNumber.Text = predialPlan.CallCenterNumber;
+            setEWT.Text = $"~{predialPlan.EWT} minutes";
+        }
+        private void LoadPredialPlanModel(PredialPlanModel predialPlan)
+        {
+            predialPlanDetailDataAccess = new PredialPlanDetailDataAccess();
+               var result = predialPlanDetailDataAccess.GetPredialPlansDetail(predialPlan);
+            if (result == null)
+            {
+                DisplayAlert("Warning", "Error load predial plan detail", "OK");
+                return;
+            }
+            listDetail.ItemsSource = result;
         }
         private async void btnCall_Clicked(object sender, EventArgs e)
         {
-            userDataAccess = new UserDataAccess();
+            UserDataAccess userDataAccess = new UserDataAccess();
             var user = userDataAccess.GetUser();
             using (System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient())
             {
@@ -42,12 +53,13 @@ namespace Predial
                     JObject oJsonObject = new JObject();
                     oJsonObject.Add("PredialPlanID", 9);
                     oJsonObject.Add("CustomerID", 2);
-
                     oJsonObject.Add("PhoneNumber",user.PhoneNumber);
-
-
                     System.Net.Http.HttpContent http = new StringContent(oJsonObject.ToString(), Encoding.UTF8, sContentType);
                     httpClient.PostAsync("http://192.168.1.101/api/predialplan/makecall", http).Result.ToString();
+                }
+                else
+                {
+                    await Navigation.PushPopupAsync(new AddUserPhoneNumber());
                 }
             }
         }
@@ -59,7 +71,6 @@ namespace Predial
 
         private void btnEdit_Clicked(object sender, EventArgs e)
         {
-
         }
 
         private void btnEditSub_Clicked(object sender, EventArgs e)

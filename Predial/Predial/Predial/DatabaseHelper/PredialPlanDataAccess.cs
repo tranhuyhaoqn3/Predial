@@ -13,19 +13,25 @@ namespace Predial.DatabaseHelper
             {
                 var predialPlanDefault = new PredialPlanModel
                 {
-                    PredialPlanName = "Call AK Sontor Service"
+                    PredialPlanName = "Call AK Sontor Service",
+                    EWT=15,
+                    CallCenterNumber=18001090.ToString(),
                 };
                 sqliteConnection.Insert(predialPlanDefault);
 
                 predialPlanDefault = new PredialPlanModel
                 {
-                    PredialPlanName = "Bolton Health Care"
+                    PredialPlanName = "Bolton Health Care",
+                     EWT = 5,
+                    CallCenterNumber = 19001790.ToString(),
                 };
                 sqliteConnection.Insert(predialPlanDefault);
 
                 predialPlanDefault = new PredialPlanModel
                 {
-                    PredialPlanName = "Apple Texas Sale Service"
+                    PredialPlanName = "Apple Texas Sale Service",
+                    EWT = 10,
+                    CallCenterNumber = 09001790.ToString(),
                 };
                 sqliteConnection.Insert(predialPlanDefault);
             }

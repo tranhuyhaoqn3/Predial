@@ -9,6 +9,8 @@ using Predial;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SuaveControls.Views;
+using Predial.DatabaseHelper;
+using Predial.Model;
 
 namespace Predial
 {
@@ -24,16 +26,14 @@ namespace Predial
                 Title = "Predial Plans";
                 
             });
+            PlanDefault();
+        }
 
-            List<String> myListString = new List<String>();
-
-            myListString.Add("Call AK Sotor Service");
-            myListString.Add("Bolton Health Care");
-            myListString.Add("Apple Texas Sale Service");
-            myListString.Add("WorldCup 2022");
-            myDemoListView.ItemsSource = myListString;
-
-       
+        private void PlanDefault()
+        {
+            PredialPlanDataAccess predialPlanDataAccess = new PredialPlanDataAccess();
+            var list=predialPlanDataAccess.GetAllPredialPlans();
+            myDemoListView.ItemsSource = list;
         }
 
         private async void ImageButton_Clicked(object sender, EventArgs e)
@@ -43,9 +43,8 @@ namespace Predial
         
         private void MyDemoListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = e.SelectedItem;
-            
-            Navigation.PushAsync(new DetailPlan());
+            PredialPlanModel predialPlan = myDemoListView.SelectedItem as PredialPlanModel;
+            Navigation.PushAsync(new DetailPlan(predialPlan));
         }
 
         private  void MenuItem1_Clicked(object sender, EventArgs e)

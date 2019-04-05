@@ -37,11 +37,12 @@
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
 
-            <Label Text="Predial Plans" FontSize="Large"
+            <Label Text="" FontSize="Large"
                    Grid.Row="1"
                    Grid.Column="1"
-                   Grid.ColumnSpan="5"
+                   Grid.ColumnSpan="8"
                    VerticalOptions="Center"
+                   x:Name="setName"
                    />
             <ImageButton Source="edit" 
                          VerticalOptions="End"
@@ -60,7 +61,7 @@
                    VerticalOptions="Start"
                    />
             
-            <Label Text="1800575775" 
+            <Label Text="" 
                    x:Name="setNumber" 
                    FontSize="Small"
                    Grid.Row="2"
@@ -75,7 +76,8 @@
                    HorizontalOptions="End"
                    VerticalOptions="Start"
                    />
-            <Label Text="~15 minutes" 
+            <Label Text="" 
+                   x:Name="setEWT"
                    FontSize="Small"
                    Grid.Row="2"
                    Grid.Column="6"
@@ -90,6 +92,7 @@
                     Grid.Column="6"
                     Grid.ColumnSpan="2"
                     VerticalOptions="Start"
+                    Clicked="btnEdit_Clicked"
                     />
             <Button Text="Call"  BackgroundColor="#83E34C"
                     TextColor="White"
@@ -97,6 +100,7 @@
                     Grid.Column="8"
                     Grid.ColumnSpan="2"
                     VerticalOptions="Start"
+                    Clicked="btnCall_Clicked"
                     />
             <Label Text="Plan Detail:"
                    FontSize="Small"
@@ -111,22 +115,47 @@
                    Grid.ColumnSpan="9"
                    Padding="0">
                 <ListView x:Name="listDetail" BackgroundColor="White" SeparatorColor="Black">
+                    <ListView.Header >
+                        <Grid BackgroundColor="#4CB050">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="38*" />
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="30*" />
+                            </Grid.ColumnDefinitions>
+                            <Label  Text="Step" HorizontalOptions="Center" FontSize="Small" TextColor="White" Grid.Column="1" />
+                            <Label  Text="Wait(second)" HorizontalOptions="Center"  FontSize="Small" TextColor="White"  Grid.Column="2"/>
+                            <Label  Text="Press" HorizontalOptions="Center"  FontSize="Small" TextColor="White"  Grid.Column="3"/>
+                        </Grid>
+                    </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout BackgroundColor="white" Orientation="Vertical">
-                                    <StackLayout Orientation="Horizontal">
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="10*" />
+                                            <ColumnDefinition Width="38*" />
+                                            <ColumnDefinition Width="20*" />
+                                            <ColumnDefinition Width="15*" />
+                                            <ColumnDefinition Width="15*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding Step}" VerticalOptions="Center" FontSize="Medium" HorizontalOptions="Center" Grid.Column="1"   TextColor="Black"/>
+                                        <Label Text="{Binding WaitingSeconds}" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center"  Grid.Column="2"  TextColor="Black"/>
+                                        <Label Text="{Binding Key}"  VerticalOptions="Center" FontSize="Medium" HorizontalOptions="Center"  Grid.Column="3"  TextColor="Black"/>
                                         <ImageButton Source="edit" 
-                                                     VerticalOptions="Start"
-                                                     HorizontalOptions="EndAndExpand"
-                                                     Margin="5"
-                                                     BackgroundColor="white"/>
+                                                     BackgroundColor="white"
+                                                      Grid.Column="4"
+                                                     VerticalOptions="Start" 
+                                                     Opacity="0"/>
                                         <ImageButton Source="delete" 
-                                                     VerticalOptions="End"
-                                                     HorizontalOptions="End"
-                                                     Margin="5"
-                                                     BackgroundColor="white"/>
-                                    </StackLayout>
+                                                     BackgroundColor="white"
+                                                      Grid.Column="5"
+                                                     VerticalOptions="Start"
+                                                     Opacity="0"/>
+                                    </Grid>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

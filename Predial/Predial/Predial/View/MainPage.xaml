@@ -15,11 +15,11 @@
 
     <StackLayout >
         <Frame HasShadow="true" OutlineColor="Gray" Margin="10,10,10,0" Padding="3" >
-            <ListView x:Name="myDemoListView" ItemSelected="MyDemoListView_ItemSelected" SeparatorColor="Black">
+            <ListView x:Name="myDemoListView" ItemSelected="MyDemoListView_ItemSelected" SeparatorColor="black">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Label Text="{x:Binding}" VerticalOptions="Center" Margin="20,0,0,0" HorizontalOptions="Start"  TextColor="Black"/>
+                            <Label Text="{Binding PredialPlanName}" VerticalOptions="Center" Margin="20,0,0,0" HorizontalOptions="Start"  TextColor="Black"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -32,7 +32,8 @@
                  Image="plus"
                 ButtonColor="#4CB050"
                 WidthRequest="80"
-                HeightRequest="90">
+                HeightRequest="90"
+                Clicked="ImageButton_Clicked">
             </views:FloatingActionButton>
         </StackLayout>
     </StackLayout>
