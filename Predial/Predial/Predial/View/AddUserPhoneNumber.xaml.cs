@@ -12,6 +12,7 @@ using System.Net.Http;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Rg.Plugins.Popup.Extensions;
 
 namespace Predial
 {
@@ -24,11 +25,11 @@ namespace Predial
             InitializeComponent();
         }
 
-        private void ButtonSave_Clicked(object sender, EventArgs e)
+        private async void ButtonSave_Clicked(object sender, EventArgs e)
         {
             if (String.IsNullOrWhiteSpace(PhoneEntry.Text) || !PhoneEntry.Text.All(char.IsDigit))
             {
-                DisplayAlert("Alert", "Please fill correct phone number", "OK");
+              await  DisplayAlert("Alert", "Please fill correct phone number", "OK");
                 PhoneEntry.Focus();
                 return;
             }
@@ -39,12 +40,12 @@ namespace Predial
             };
             if (userDataAccess.UpdateUser(user))
             {
-                DependencyService.Get<IShowAlert>().ShowAlert("Your phone number have been saved !!!!");
-               
+                await DisplayAlert("Alert", "We can not save your phone number", "OK");
+                await Navigation.PopPopupAsync();
             }
             else
             {
-                 DisplayAlert("Something Wrong", "We can not save your phone number", "Cancel");
+               await  DisplayAlert("Something Wrong", "We can not save your phone number", "Cancel");
             }
             
         }

@@ -24,7 +24,6 @@ namespace Predial
             Device.BeginInvokeOnMainThread(() =>
             {
                 Title = "Predial Plans";
-                
             });
             PlanDefault();
         }
@@ -38,9 +37,16 @@ namespace Predial
 
         private async void ImageButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AddMorePlan());
+            AddMorePlan addMorePlan = new AddMorePlan();
+            addMorePlan.AddSucceeded += AddMorePlan_AddSucceeded;
+            await Navigation.PushAsync(addMorePlan);
         }
-        
+
+        private void AddMorePlan_AddSucceeded(object sender, EventArgs e)
+        {
+            PlanDefault();
+        }
+
         private void MyDemoListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             PredialPlanModel predialPlan = myDemoListView.SelectedItem as PredialPlanModel;
@@ -50,6 +56,11 @@ namespace Predial
         private  void MenuItem1_Clicked(object sender, EventArgs e)
         {
             Navigation.PushPopupAsync(new AddUserPhoneNumber());
+        }
+
+        private void Ondelete(object sender, EventArgs e)
+        {
+            var holditem = ((MenuItem)sender);
         }
     }
 }

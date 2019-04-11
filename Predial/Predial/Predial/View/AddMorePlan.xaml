@@ -5,6 +5,7 @@
     <ContentPage.Content>
         <Grid BackgroundColor="white">
             <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -16,12 +17,12 @@
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
             <Entry Placeholder="Plan Title"  BackgroundColor="White" x:Name="entTitle"
-                       TextColor="Black" PlaceholderColor="LightGray" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"></Entry>
+                       TextColor="Black" PlaceholderColor="LightGray" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"></Entry>
             <Entry Placeholder="Calling to number" BackgroundColor="White"
                        TextColor="Black" PlaceholderColor="LightGray"  x:Name="entNumber"
-                       Keyboard="Telephone" Grid.Row="1"  Grid.Column="0"  Grid.ColumnSpan="3"></Entry>
+                       Keyboard="Telephone" Grid.Row="2"  Grid.Column="0"  Grid.ColumnSpan="3"></Entry>
             <Button Text="Save" TextColor="white"  CornerRadius="10"
-                        BackgroundColor="#4CB050" VerticalOptions="Center" Grid.Row="2"  Grid.Column="1"
+                        BackgroundColor="#4CB050" VerticalOptions="Center" Grid.Row="3"  Grid.Column="1"
                     Clicked="btnSave_Clicked"></Button>
 
         </Grid>

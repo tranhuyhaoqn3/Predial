@@ -1,8 +1,10 @@
-﻿using Predial.DatabaseHelper;
+﻿using Newtonsoft.Json.Linq;
+using Predial.DatabaseHelper;
 using Predial.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,12 +16,13 @@ namespace Predial
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AddMorePlan : ContentPage
 	{
-		public AddMorePlan ()
+        public event EventHandler AddSucceeded;
+        public AddMorePlan ()
 		{
 			InitializeComponent ();
 		}
 
-        private void btnSave_Clicked(object sender, EventArgs e)
+        private async  void btnSave_Clicked(object sender, EventArgs e)
         {
             if(CheckInput())
             {
@@ -32,12 +35,13 @@ namespace Predial
 
                 if (predialPlanDataAccess.InsertPredialPlan(predialPlanModel))
                 {
-                    DisplayAlert("Alert", "Adding successfully", "OK");
-                    Navigation.PushAsync(new MainPage());
+                   await  DisplayAlert("Alert", "Adding successfully", "OK");
+                   await  Navigation.PopAsync();
+                    OnAddSucceeded();
                 }
                 else
                 {
-                    DisplayAlert("Alert", "Adding unsuccessfully", "OK");
+                    await DisplayAlert("Alert", "Adding unsuccessfully", "OK");
                 }
             }
         }
@@ -58,6 +62,13 @@ namespace Predial
             else
             {
                 return true;
+            }
+        }
+        private void OnAddSucceeded()
+        {
+            if (AddSucceeded != null)
+            {
+                AddSucceeded(this, EventArgs.Empty);
             }
         }
     }

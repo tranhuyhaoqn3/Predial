@@ -14,7 +14,8 @@ namespace Predial.DatabaseHelper
                 var predialPlanDefault = new PredialPlanModel
                 {
                     PredialPlanName = "Call AK Sontor Service",
-                    EWT=15,
+                    EWT = 15,
+                    KeyPressed = String.Concat(5,"-", 2,"-",6),
                     CallCenterNumber=18001090.ToString(),
                 };
                 sqliteConnection.Insert(predialPlanDefault);

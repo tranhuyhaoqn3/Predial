@@ -14,7 +14,7 @@ namespace Predial.DatabaseHelper
             {
                 var predialPlanDefault = new PredialPlanDetailModel
                 {
-                    PredialPlanID = 1,
+                    ClientPredialPlanID = 1,
                     Key = 5.ToString(),
                     Step = 1,
                     WaitingSeconds = 2
@@ -22,7 +22,7 @@ namespace Predial.DatabaseHelper
                 sqliteConnection.Insert(predialPlanDefault);
                 predialPlanDefault = new PredialPlanDetailModel
                 {
-                    PredialPlanID = 1,
+                    ClientPredialPlanID = 1,
                     Key = 2.ToString(),
                     Step = 2,
                     WaitingSeconds = 3
@@ -30,7 +30,7 @@ namespace Predial.DatabaseHelper
                 sqliteConnection.Insert(predialPlanDefault);
                 predialPlanDefault = new PredialPlanDetailModel
                 {
-                    PredialPlanID = 1,
+                    ClientPredialPlanID = 1,
                     Key = 6.ToString(),
                     Step = 3,
                     WaitingSeconds = 2
@@ -40,7 +40,7 @@ namespace Predial.DatabaseHelper
         }
         public List<PredialPlanDetailModel> GetPredialPlansDetail(PredialPlanModel predialPlan)
         {
-            return sqliteConnection.Table<PredialPlanDetailModel>().Where(item=> item.PredialPlanID == predialPlan.PredialPlanID).ToList();
+            return sqliteConnection.Table<PredialPlanDetailModel>().Where(item=> item.ClientPredialPlanID == predialPlan.PredialPlanID).ToList();
         }
 
         public bool InsertPredialPlanDetail(PredialPlanDetailModel predialPlanDetail)

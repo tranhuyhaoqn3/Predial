@@ -8,10 +8,11 @@ namespace Predial.Model
     public class PredialPlanDetailModel
     {
         [PrimaryKey, AutoIncrement]
-        public int PredialPlanDetaiID { get; set; }
-        public int PredialPlanID { get; set; }
+        public long DetailID { get; set; }
+        public long ClientPredialPlanID { get; set; }
         public int Step { get; set; }
         public string Key { get; set; }
+        public bool IsDynamicKey { get; set; }
         public int WaitingSeconds { get; set; }
     }
 }

@@ -50,7 +50,6 @@ namespace Predial.Droid
             {
                 var incomingPhoneNumber = intent.GetStringExtra(TelephonyManager.ExtraIncomingNumber);
                 Toast.MakeText(context, $"Incoming Number: {incomingPhoneNumber}", ToastLength.Long).Show();
-
                 CreateNotificationChannel(incomingNumber, context);
             }
 
@@ -71,6 +70,8 @@ namespace Predial.Droid
             NotificationManager notificationManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
             String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
             Intent notificationIntent = new Intent(context, typeof(MainActivity));
+            notificationIntent.SetAction("android.intent.action.MAIN");
+            notificationIntent.PutExtra("page", 1);
             notificationIntent.SetFlags(ActivityFlags.ClearTop);
             PendingIntent penintent = PendingIntent.GetActivities(context, 0, new Intent[] { notificationIntent }, 0);
             if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
@@ -88,7 +89,14 @@ namespace Predial.Droid
 
 
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID);
+            NotificationCompat.BigTextStyle textStyle = new NotificationCompat.BigTextStyle();
 
+            string longTextMessage = "For call president, please press 1-2-3\n";
+
+            longTextMessage += "For call nurse, please press  1-5-4\n";
+            longTextMessage += "For call someone, please press  1-1-1\n";
+            textStyle.BigText(longTextMessage);
+            textStyle.SetSummaryText("From Call Center");
             notificationBuilder.SetAutoCancel(true)
                     .SetDefaults(Notification.ColorDefault)
                     .SetSmallIcon(Resource.Drawable.plus)
@@ -98,6 +106,7 @@ namespace Predial.Droid
                     .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification))
                     .SetContentText("End call with Call center")
                    .SetContentIntent(penintent);
+            notificationBuilder.SetStyle(textStyle);
             notificationManager.Notify(p, notificationBuilder.Build());
             p++;
         }

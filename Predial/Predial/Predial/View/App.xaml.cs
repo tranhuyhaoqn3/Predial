@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Android.Content.Res;
+using Predial.Model;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,8 +19,21 @@ namespace Predial
             };
             
         }
-        
-                    
+        public App(int rs)
+        {
+            PredialPlanModel predialPlanModel = new PredialPlanModel()
+            {
+                PredialPlanID = 1
+            };
+            MainPage = new NavigationPage(new MainPage())
+            {
+                BarTextColor = Color.White,
+                BarBackgroundColor = Color.FromHex("#4CB050"),
+            };
+            MainPage.Navigation.PushAsync(new DetailPlan(predialPlanModel));
+        }
+
+
         protected override void OnStart()
         {
             // Handle when your app starts
@@ -31,7 +46,7 @@ namespace Predial
 
         protected override void OnResume()
         {
-            // Handle when your app resumes
+          
         }
     }
 }

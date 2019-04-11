@@ -11,6 +11,7 @@ using Xamarin.Forms.Xaml;
 using Rg.Plugins.Popup.Extensions;
 using Predial.Model;
 using Predial.DatabaseHelper;
+using Predial.View;
 
 namespace Predial
 {
@@ -18,31 +19,32 @@ namespace Predial
 	public partial class DetailPlan : ContentPage
 	{
         UserDataAccess userDataAccess;
+        List<PredialPlanDetailModel> clientPredialPlanDetailModels;
+        PredialPlanModel predialPlanModel;
         PredialPlanDetailDataAccess predialPlanDetailDataAccess;
         public DetailPlan (PredialPlanModel predialPlan)
 		{
-			InitializeComponent ();
-
+            InitializeComponent();
             LoadPredialPlanModel(predialPlan);
-
             setName.Text= predialPlan.PredialPlanName;
             setNumber.Text = predialPlan.CallCenterNumber;
             setEWT.Text = $"~{predialPlan.EWT} minutes";
+            predialPlanModel = predialPlan;
         }
         private void LoadPredialPlanModel(PredialPlanModel predialPlan)
         {
             predialPlanDetailDataAccess = new PredialPlanDetailDataAccess();
-               var result = predialPlanDetailDataAccess.GetPredialPlansDetail(predialPlan);
-            if (result == null)
+            clientPredialPlanDetailModels = predialPlanDetailDataAccess.GetPredialPlansDetail(predialPlan);
+            if (clientPredialPlanDetailModels == null)
             {
                 DisplayAlert("Warning", "Error load predial plan detail", "OK");
                 return;
             }
-            listDetail.ItemsSource = result;
+            listDetail.ItemsSource = clientPredialPlanDetailModels;
         }
         private async void btnCall_Clicked(object sender, EventArgs e)
         {
-            UserDataAccess userDataAccess = new UserDataAccess();
+            userDataAccess = new UserDataAccess();
             var user = userDataAccess.GetUser();
             using (System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient())
             {
@@ -80,6 +82,26 @@ namespace Predial
         private void btnDeleteSub_Clicked(object sender, EventArgs e)
         {
 
+        }
+
+        private void ListDetail_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+        }
+
+        private  void FloatingActionButton_Clicked(object sender, EventArgs e)
+        {
+            AddPredialPlanDetail addPredialPlanDetail = new AddPredialPlanDetail(predialPlanModel);
+            addPredialPlanDetail.AddSucceeded += AddPredialPlanDetail_AddSucceeded;
+            if (clientPredialPlanDetailModels != null)
+            {
+                addPredialPlanDetail.setStep(clientPredialPlanDetailModels.Count);
+            }
+            Navigation.PushPopupAsync(addPredialPlanDetail);
+        }
+
+        private void AddPredialPlanDetail_AddSucceeded(object sender, EventArgs e)
+        {
+            LoadPredialPlanModel(predialPlanModel);
         }
     }
 }

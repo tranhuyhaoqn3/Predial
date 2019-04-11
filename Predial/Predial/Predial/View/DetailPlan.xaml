@@ -114,7 +114,10 @@
                    Grid.Column="1"
                    Grid.ColumnSpan="9"
                    Padding="0">
-                <ListView x:Name="listDetail" BackgroundColor="White" SeparatorColor="Black">
+                <ListView x:Name="listDetail" 
+                          BackgroundColor="White" 
+                          SeparatorColor="Black"
+                          ItemSelected="ListDetail_ItemSelected">
                     <ListView.Header >
                         <Grid BackgroundColor="#4CB050">
                             <Grid.ColumnDefinitions>
@@ -131,7 +134,7 @@
                     </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
+                            <ViewCell x:Name="cell">
                                 <StackLayout BackgroundColor="white" Orientation="Vertical">
                                     <Grid >
                                         <Grid.ColumnDefinitions>
@@ -170,7 +173,8 @@
                 Grid.Row="6"
                 Grid.Column="7"
                 Grid.ColumnSpan="3"
-                HorizontalOptions="End">
+                HorizontalOptions="End"
+                Clicked="FloatingActionButton_Clicked">
             </views:FloatingActionButton>
         </Grid>
     </ContentPage.Content>
